@@ -36,20 +36,20 @@
 
 <div class="container">
     @include('components.alerts')
-    <div class="card card-primary">
+    <div class="card card-navy">
         <div class="card-header">
             <h3 class="card-title">Data Profil</h3>
         </div>
         <!-- /.card-header -->
-        <div class="card-body">
-            <table id="data-table" class="table table-bordered table-striped">
+        <div class="card-body table-responsive">
+            <table id="data-table" class="table table-sm table-bordered table-striped">
                 <thead class="table-dark">
                     <tr>
                         <th style="width: 1%">No.</th>
                         <th>Nama</th>
                         <th>Logo</th>
                         <th>Alamat</th>
-                        <th class="text-center" style="width: 15%"><i class="fas fa-cogs"></i></th>
+                        <th class="text-center" style="width: 5%"><i class="fas fa-cogs"></i></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -91,7 +91,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-sm btn-primary" id="saveBtn" value="create">Save</button>
+                    <button type="submit" class="btn btn-sm bg-navy" id="saveBtn" value="create">Save</button>
                 </div>
             </form>
         </div>
@@ -136,7 +136,7 @@
                 {data: 'name', name: 'name'},
                 {data: 'image', name: 'image'},
                 {data: 'address', name: 'address'},
-                {data: 'action', name: 'action', orderable: true, searchable: true},
+                {data: 'action', name: 'action', orderable: true, searchable: true, className: 'dt-body-center'},
             ]
         });
 

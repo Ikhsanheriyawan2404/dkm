@@ -15,8 +15,8 @@ class ProfileSeeder extends Seeder
     public function run()
     {
         Profile::create([
-            'name' => 'Contoh',
-            'address' => 'Desa Kmepk Penangisan',
+            'name' => 'DKM Masjid Jami An-nur Penangisan',
+            'address' => 'Desa Kempek Blok 3 Penangisan Kecamatan Gempol Kabupaten Cirebon',
         ]);
     }
 }

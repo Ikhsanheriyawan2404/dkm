@@ -29,7 +29,7 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('asset') }}/plugins/summernote/summernote-bs4.min.css">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition dark-mode sidebar-mini layout-fixed">
 <div class="wrapper">
 
   <!-- Preloader -->
@@ -42,11 +42,11 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-navy elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('home') }}" class="brand-link">
-      <img src="{{ asset('asset') }}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Accounting</span>
+    <a href="{{ route('home') }}" class="brand-link bg-navy">
+      <img src="{{ \App\Models\Profile::first()->takeImage }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">{{ \App\Models\Profile::first()->name }}</span>
     </a>
 
     <!-- Sidebar -->

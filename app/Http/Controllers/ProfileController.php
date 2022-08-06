@@ -16,18 +16,12 @@ class ProfileController extends Controller
             return DataTables::of($profiles)
                     ->addIndexColumn()
                     ->editColumn('image', function (Profile $profile) {
-                        return '<img src="'. $profile->takeImage .'" />';
+                        return '<img src="'. $profile->takeImage .'" width="100px" class="img-fluid">';
                     })
                     ->addColumn('action', function($row){
                         $btn =
 
-                        '<div class="btn-group">
-                            <a class="badge badge-primary dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                            </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="javascript:void(0)" data-id="'.$row->id.'" id="editProfile" class="btn btn-sm btn-primary">Edit</a>
-                            </div>
-                        </div>';
+                        '<a class="badge badge-sm bg-navy" href="javascript:void(0)" data-id="'.$row->id.'" id="editProfile" data-toggle="tooltip" data-placement="top" title="Edit Data"><i class="fa fa-pencil-alt"></i></a>';
                         return $btn;
                     })
                     ->rawColumns(['checkbox', 'image', 'action'])
@@ -51,7 +45,7 @@ class ProfileController extends Controller
         if ($profileId) {
             $profile = Profile::find($profileId);
             if (request('image')) {
-                if ($profile->image != 'img/profiles/default.jpg') {
+                if ($profile->image != 'default.jpg') {
                     Storage::delete($profile->image);
                     $image = request()->file('image')->store('img/profiles');
                 }
@@ -60,10 +54,10 @@ class ProfileController extends Controller
                 $image = $profile->image;
             }
         } else {
-            $image = request('image') ? request()->file('image')->store('img/profiles') : 'img/profiles/default.jpg';
+            $image = request('image') ? request()->file('image')->store('img/profiles') : 'default.jpg';
         }
 
-        Profile::updateOrCreate([
+        Profile::updateOrCreate(['id' => request('profile_id')], [
             'name' => request('name'),
             'image' => $image,
             'address' => request('address'),

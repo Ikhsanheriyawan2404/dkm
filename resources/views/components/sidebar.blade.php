@@ -23,26 +23,26 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('items.index') }}" class="nav-link {{ request()->routeIs('items.*') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-box"></i>
+            <a href="{{ route('members.index') }}" class="nav-link {{ request()->routeIs('members.*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-users"></i>
             <p>
-                Barang
+                Pengurus
             </p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('categories.index') }}" class="nav-link {{ request()->routeIs('categories.*') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-box"></i>
+            <a href="{{ route('profiles.index') }}" class="nav-link {{ request()->routeIs('profiles.*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-cog"></i>
             <p>
-                Kategori Barang
+                Profil
             </p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('accounts.index') }}" class="nav-link {{ request()->routeIs('accounts.*') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-box"></i>
+            <a href="{{ route('transactions.index') }}" class="nav-link {{ request()->routeIs('transactions.*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-money-bill"></i>
             <p>
-                Akun
+                Keuangan
             </p>
             </a>
         </li>
