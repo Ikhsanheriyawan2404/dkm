@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -27,6 +28,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resources(['categories' => CategoryController::class]);
     Route::post('categories/delete-selected', [CategoryController::class, 'deleteSelected'])->name('categories.deleteSelected');
+
+    Route::resources(['profiles' => ProfileController::class]);
 
     Route::resources(['accounts' => AccountController::class]);
     Route::post('accounts/delete-selected', [AccountController::class, 'deleteSelected'])->name('accounts.deleteSelected');

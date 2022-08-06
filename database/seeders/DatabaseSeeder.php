@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             CategoryTableSeeder::class,
+            ProfileSeeder::class,
         ]);
         \App\Models\Item::factory(100)->create();
     }
