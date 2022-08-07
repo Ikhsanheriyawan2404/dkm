@@ -9,6 +9,11 @@ use Yajra\DataTables\Facades\DataTables;
 
 class MemberController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:member-module', ['only' => ['index', 'store', 'edit', 'deleteSelected', 'destroy']]);
+    }
+
     public function index()
     {
         if (request()->ajax()) {

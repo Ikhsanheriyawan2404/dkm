@@ -5,7 +5,7 @@
         <img src="{{ asset('asset') }}/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-        <a href="{{ route('users.index') }}" class="d-block">{{ auth()->user()->name }}</a>
+        <a href="{{ route('users.index') }}" class="d-block">{{ isset(auth()->user()->name) ? auth()->user()->name : 'Users' }}</a>
         </div>
     </div>
 
@@ -22,6 +22,7 @@
             </p>
             </a>
         </li>
+        @can('member-module')
         <li class="nav-item">
             <a href="{{ route('members.index') }}" class="nav-link {{ request()->routeIs('members.*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-users"></i>
@@ -30,6 +31,8 @@
             </p>
             </a>
         </li>
+        @endcan
+        @can('profile-module')
         <li class="nav-item">
             <a href="{{ route('profiles.index') }}" class="nav-link {{ request()->routeIs('profiles.*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-cog"></i>
@@ -38,13 +41,16 @@
             </p>
             </a>
         </li>
+        @endcan
         <li class="nav-item">
+            @can('transaction-module')
             <a href="{{ route('transactions.index') }}" class="nav-link {{ request()->routeIs('transactions.*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-money-bill"></i>
             <p>
                 Keuangan
             </p>
             </a>
+            @endcan
         </li>
         <li class="nav-item">
             @can('user-list')
@@ -79,6 +85,8 @@
                 </li>
             </ul>
         </li>
+        @guest
+        @else
         <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"
                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">
@@ -91,6 +99,7 @@
             </p>
             </a>
         </li>
+        @endguest
 
         </ul>
     </nav>

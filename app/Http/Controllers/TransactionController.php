@@ -8,6 +8,11 @@ use App\Http\Requests\TransactionRequest;
 
 class TransactionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:transaction-module', ['only' => ['index', 'store', 'edit', 'deleteSelected', 'destroy']]);
+    }
+
     public function index()
     {
         if (request()->ajax()) {

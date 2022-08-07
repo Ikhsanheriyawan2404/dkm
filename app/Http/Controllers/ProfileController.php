@@ -9,6 +9,11 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:profile-module', ['only' => ['index', 'store', 'edit']]);
+    }
+
     public function index()
     {
         if (request()->ajax()) {

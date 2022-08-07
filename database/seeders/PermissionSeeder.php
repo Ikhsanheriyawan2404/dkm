@@ -23,10 +23,9 @@ class PermissionSeeder extends Seeder
             'role-create',
             'role-edit',
             'role-delete',
-            'item-list',
-            'item-create',
-            'item-edit',
-            'item-delete',
+            'transaction-module',
+            'member-module',
+            'profile-module',
          ];
 
          foreach ($permissions as $permission) {

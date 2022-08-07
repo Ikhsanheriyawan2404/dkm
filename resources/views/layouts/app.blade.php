@@ -29,7 +29,7 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('asset') }}/plugins/summernote/summernote-bs4.min.css">
 </head>
-<body class="hold-transition dark-mode sidebar-mini layout-fixed">
+<body class="hold-transition dark-mode sidebar-mini layout-fixed sidebar-collapse">
 <div class="wrapper">
 
   <!-- Preloader -->
