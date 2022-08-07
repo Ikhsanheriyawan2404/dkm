@@ -2,13 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AccountController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\{RoleController, UserController, AccountController, ProfileController, MemberController ,TransactionController};
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\MemberController;
 
 // Home
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -31,8 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::post('members/delete-selected', [MemberController::class, 'deleteSelected'])->name('members.deleteSelected');
 
     // Transaksi Keuangan
-    Route::resources(['transactions' => MemberController::class]);
-    Route::post('transactions/delete-selected', [MemberController::class, 'deleteSelected'])->name('transactions.deleteSelected');
+    Route::resources(['transactions' => TransactionController::class]);
+    Route::post('transactions/delete-selected', [TransactionController::class, 'deleteSelected'])->name('transactions.deleteSelected');
 
     // Akun Kas
     Route::resources(['accounts' => AccountController::class]);
