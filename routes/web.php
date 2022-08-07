@@ -7,6 +7,9 @@ use App\Http\Controllers\Auth\LoginController;
 
 // Home
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/data-table-members', [App\Http\Controllers\HomeController::class, 'dataTableMembers'])->name('dataTableMembers');
+Route::get('/data-table-transactions', [App\Http\Controllers\HomeController::class, 'dataTableTransactions'])->name('dataTableTransactions');
+
 // Login Routes ...
 Route::get('login', [LoginController::class, 'showLoginForm']);
 Route::post('login', [LoginController::class,'login'])->name('login');
