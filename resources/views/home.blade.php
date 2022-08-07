@@ -34,7 +34,7 @@
                 <p>Total Kas</p>
             </div>
             <div class="icon">
-                <i class="ion ion-bag"></i>
+                <i class="fa fa-wallet"></i>
             </div>
             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -49,7 +49,7 @@
                 <p>Pemasukan</p>
             </div>
             <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="fa fa-hand-holding-usd"></i>
             </div>
             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -64,7 +64,7 @@
                 <p>Pengeluaran</p>
             </div>
             <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="fa fa-dollar-sign"></i>
             </div>
             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>

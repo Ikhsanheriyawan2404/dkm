@@ -53,6 +53,16 @@
             @endcan
         </li>
         <li class="nav-item">
+            @can('transaction-module')
+            <a href="{{ route('trash.transactions') }}" class="nav-link {{ request()->routeIs('trash.transactions') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-trash-alt"></i>
+            <p>
+                Data Sampah
+            </p>
+            </a>
+            @endcan
+        </li>
+        <li class="nav-item">
             @can('user-list')
             <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') || request()->routeIs('roles.*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-user"></i>

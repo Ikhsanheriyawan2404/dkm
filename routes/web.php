@@ -16,10 +16,10 @@ Route::post('login', [LoginController::class,'login'])->name('login');
 Route::post('logout',  [LoginController::class,'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
+    // Management User & Roles
     Route::resources(['users' => UserController::class]);
     Route::post('users/{user:id}/status', [UserController::class, 'changeStatus'])->name('users.status');
-    Route::resources(['items' => ItemController::class]);
-    Route::post('items/delete-selected', [ItemController::class, 'deleteSelected'])->name('items.deleteSelected');
+    Route::resources(['roles' => RoleController::class]);
 
     // Profil DKM
     Route::resources(['profiles' => ProfileController::class]);
@@ -31,10 +31,10 @@ Route::middleware('auth')->group(function () {
     // Transaksi Keuangan
     Route::resources(['transactions' => TransactionController::class]);
     Route::post('transactions/delete-selected', [TransactionController::class, 'deleteSelected'])->name('transactions.deleteSelected');
-
-    // Akun Kas
-    Route::resources(['accounts' => AccountController::class]);
-    Route::post('accounts/delete-selected', [AccountController::class, 'deleteSelected'])->name('accounts.deleteSelected');
-
-    Route::resources(['roles' => RoleController::class]);
+    Route::prefix('trash')->group(function () {
+        Route::get('transactions', [TransactionController::class, 'trash'])->name('trash.transactions');
+        Route::get('transactions/restore/{id}', [TransactionController::class, 'restore'])->name('restore.transactions');
+        Route::delete('transactions/delete/{id}', [TransactionController::class, 'deletePermanent'])->name('deletePermanent.transactions');
+        Route::delete('transactions/deleteAll/', [TransactionController::class, 'deleteAll'])->name('deleteAll.transactions');
+    });
 });

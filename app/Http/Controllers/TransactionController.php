@@ -84,4 +84,39 @@ class TransactionController extends Controller
         Transaction::whereIn('id', $id)->delete();
         return response()->json(['code'=> 1, 'msg' => 'Data transaksi berhasil dihapus']);
     }
+
+    public function trash()
+    {
+        $transactions = Transaction::onlyTrashed()->latest()->get();
+        return view('transactions.trash', [
+            'title' => 'Data Sampah Transaksi',
+            'transactions' => $transactions,
+        ]);
+    }
+
+    public function restore($id)
+    {
+        $transaction = Transaction::onlyTrashed()->where('id', $id);
+        $transaction->restore();
+        toast('Data transaksi berhasil dipulihkan!', 'success');
+        return redirect()->back();
+    }
+
+    public function deletePermanent($id)
+    {
+        $transaction = Transaction::onlyTrashed()->where('id', $id);
+        $transaction->forceDelete();
+
+        toast('Data transaksi berhasil dihapus permanen!', 'success');
+        return redirect()->back();
+    }
+
+    public function deleteAll()
+    {
+        $transactions = Transaction::onlyTrashed();
+        $transactions->forceDelete();
+
+        toast('Semua data transaksi berhasil dihapus permanen!', 'success');
+        return redirect()->back();
+    }
 }
