@@ -10,7 +10,7 @@ class TransactionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:transaction-module', ['only' => ['index', 'store', 'edit', 'deleteSelected', 'destroy']]);
+        $this->middleware('permission:transaction-module', ['only' => ['index', 'store', 'edit', 'deleteSelected', 'destroy', 'trash', 'restore', 'deletePermanent', 'deleteAll']]);
     }
 
     public function index()
@@ -20,10 +20,10 @@ class TransactionController extends Controller
             return DataTables::of($transactions)
                     ->addIndexColumn()
                     ->editColumn('debit', function (Transaction $transaction) {
-                        return number_format($transaction->debit);
+                        return $transaction->debit != NULL ? number_format($transaction->debit) : '-';
                     })
                     ->editColumn('credit', function (Transaction $transaction) {
-                        return number_format($transaction->credit);
+                        return $transaction->credit != NULL ? number_format($transaction->credit) : '-';
                     })
                     ->addColumn('checkbox', function ($row) {
                         return '<input type="checkbox" name="checkbox" id="check" class="checkbox" data-id="' . $row->id . '">';
@@ -61,8 +61,8 @@ class TransactionController extends Controller
             ['id' => request('transaction_id')],
             [
                 'description' => request('description'),
-                'debit' => request('transactionType') == 'debit' ? (int)strtok(str_replace(".", "", request('nominal')), "Rp ") : 0,
-                'credit' => request('transactionType') == 'credit' ? (int)preg_replace("/[^0-9]/", "", request('nominal')) : 0,
+                'debit' => request('transactionType') == 'debit' ? (int)strtok(str_replace(".", "", request('nominal')), "Rp ") : null,
+                'credit' => request('transactionType') == 'credit' ? (int)preg_replace("/[^0-9]/", "", request('nominal')) : null,
             ]);
     }
 

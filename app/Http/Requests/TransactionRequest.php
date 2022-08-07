@@ -24,10 +24,11 @@ class TransactionRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'description' => 'required',
-            // 'debit' => 'numeric',
-            // 'credit' => 'numeric',
-            // 'nominal' => 'numeric',
+            'description' => 'required',
+            'debit' => 'numeric',
+            'credit' => 'numeric',
+            'nominal' => 'required',
+            'transactionType' => 'required',
         ];
     }
 }

@@ -201,13 +201,18 @@
                 $.get("{{ route('transactions.index') }}" + '/' + transaction_id + '/edit', function(data) {
                     $('#modal-md').modal('show');
                     setTimeout(function() {
-                        $('#name').focus();
+                        $('#nominal').focus();
                     }, 500);
                     $('#modal-title').html("Edit Transaksi");
                     $('#saveBtn').removeAttr('disabled');
                     $('#saveBtn').html("Simpan");
                     $('#transaction_id').val(data.id);
-                    $('#nominal').val(data.debit != 0 || data.debit != 0 ? data.debit : data.credit);
+                    // if (data.debit != NULL) {
+                    //     let nominal = data.debit
+                    // } else {
+                    //     let nominal = data.credit
+                    // }
+                    $('#nominal').val(data.credit === null ? data.debit : data.credit);
                     $('#description').val(data.description);
                     $('#transactionType').val(data.debit > 0 ? 'debit' : 'credit');
                     $('#transactionType').hide();
