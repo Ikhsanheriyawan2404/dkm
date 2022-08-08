@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
+use Carbon\Carbon;
 use App\Models\Transaction;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\TransactionRequest;
@@ -16,7 +18,7 @@ class TransactionController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $transactions = Transaction::latest()->get();
+            $transactions = Transaction::orderBy('date', 'desc')->get();
             return DataTables::of($transactions)
                     ->addIndexColumn()
                     ->editColumn('debit', function (Transaction $transaction) {
@@ -24,6 +26,9 @@ class TransactionController extends Controller
                     })
                     ->editColumn('credit', function (Transaction $transaction) {
                         return $transaction->credit != NULL ? number_format($transaction->credit) : '-';
+                    })
+                    ->editColumn('date', function (Transaction $transaction) {
+                        return date('d-m-Y', strtotime($transaction->date));
                     })
                     ->addColumn('checkbox', function ($row) {
                         return '<input type="checkbox" name="checkbox" id="check" class="checkbox" data-id="' . $row->id . '">';
@@ -60,6 +65,7 @@ class TransactionController extends Controller
         Transaction::updateOrCreate(
             ['id' => request('transaction_id')],
             [
+                'date' => request('date'),
                 'description' => request('description'),
                 'debit' => request('transactionType') == 'debit' ? (int)strtok(str_replace(".", "", request('nominal')), "Rp ") : null,
                 'credit' => request('transactionType') == 'credit' ? (int)preg_replace("/[^0-9]/", "", request('nominal')) : null,
@@ -118,5 +124,22 @@ class TransactionController extends Controller
 
         toast('Semua data transaksi berhasil dihapus permanen!', 'success');
         return redirect()->back();
+    }
+
+    public function printPdf()
+    {
+        if (request('startDate') && request('endDate')) {
+            $startDate = Carbon::parse(request('startDate'))->format('Y-m-d');
+            $endDate = Carbon::parse(request('endDate'))->format('Y-m-d');
+            $transactions = Transaction::whereBetween('date', [$startDate, $endDate])->orderBy('date', 'desc')->get();
+            $period = [$startDate, $endDate];
+        } else {
+            $period = [];
+            $transactions = Transaction::orderBy('date', 'desc')->get();
+        }
+
+        // $pdf = app('dompdf.wrapper');
+        $pdf = PDF::loadView('transactions.pdf', compact(['transactions', 'period']))->setPaper('a4', 'landscape');
+        return $pdf->stream();
     }
 }

@@ -19,12 +19,6 @@ class RoleSeeder extends Seeder
             'guard_name' => 'web'
         ]);
 
-        Role::create([
-            'name' => 'Admin',
-            'guard_name' => 'web'
-        ]);
-
-
         $superadmin->givePermissionTo([
             'user-list',
             'user-create',
@@ -35,8 +29,8 @@ class RoleSeeder extends Seeder
             'role-edit',
             'role-delete',
             'transaction-module',
-            'member-module',
             'profile-module',
+            'member-module',
         ]);
     }
 }

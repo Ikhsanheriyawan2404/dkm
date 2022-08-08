@@ -20,15 +20,28 @@
     </div>
     <!-- /.content-header -->
 
-    <div class="container-fluid mb-3 d-flex justify-content-end">
-        <div class="row">
-            <div class="col-12">
-                {{-- @can('book-module') --}}
-                    <button class="btn btn-sm bg-navy" id="createNewItem">Tambah <i class="fa fa-plus"></i></button>
-                    <button class="btn btn-sm btn-danger d-none" id="deleteAllBtn">Hapus Semua</button>
-                {{-- @endcan --}}
+    <div class="container-fluid">
+        <form action="{{ route('transactions.printPdf') }}" method="post">
+            @csrf
+            <div class="form-row">
+                <div class="col-md-2">
+                    <input type="date" name="startDate" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-2">
+                    <input type="date" name="endDate" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-sm btn-danger">Filter <i class="fa fa-print"></i></button>
+                </div>
             </div>
-        </div>
+        </form>
+    </div>
+
+    <div class="container-fluid mb-3 d-flex justify-content-end">
+        @can('transaction-module')
+        <button class="btn btn-sm bg-navy" id="createNewItem">Tambah <i class="fa fa-plus"></i></button>
+        <button class="btn btn-sm btn-danger d-none" id="deleteAllBtn">Hapus Semua</button>
+        @endcan
     </div>
 
     <div class="container">
@@ -45,6 +58,7 @@
                             <th style="width: 1%">No.</th>
                             <th class="text-center"><input type="checkbox" name="main_checkbox"><label></label></th>
                             <th>Keterangan</th>
+                            <th>Tanggal</th>
                             <th>Masuk</th>
                             <th>Keluar</th>
                             <th class="text-center" style="width: 5%"><i class="fas fa-cogs"></i> </th>
@@ -88,6 +102,10 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="date">Tanggal <span class="text-danger">*</span></label>
+                            <input type="date" name="date" id="date" class="form-control form-control-sm mr-2">
+                        </div>
+                        <div class="form-group">
                             <label for="description">Keterangan <span class="text-danger">*</span></label>
                             <textarea type="text" class="form-control form-control-sm mr-2" name="description" id="description"
                                 required></textarea>
@@ -114,6 +132,7 @@
 
     <link rel="stylesheet" href="{{ asset('asset') }}/plugins/sweetalert2/sweetalert2.min.css">
     <link rel="stylesheet" href="{{ asset('asset') }}/plugins/toastr/toastr.min.css">
+
 @endsection
 @section('custom-scripts')
     <!-- DataTables  & Plugins -->
@@ -124,6 +143,7 @@
     <script src="{{ asset('asset') }}/plugins/sweetalert2/sweetalert2.min.js"></script>
     <script src="{{ asset('asset') }}/plugins/toastr/toastr.min.js"></script>
     <script src="{{ asset('asset') }}/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
     <script>
         $.ajaxSetup({
             headers: {
@@ -157,6 +177,10 @@
                         name: 'description'
                     },
                     {
+                        data: 'date',
+                        name: 'date',
+                    },
+                    {
                         data: 'debit',
                         name: 'debit',
                         className: 'dt-body-right'
@@ -188,7 +212,7 @@
                 }, 500);
                 $('#saveBtn').removeAttr('disabled');
                 $('#saveBtn').html("Simpan");
-                $('#member_id').val('');
+                $('#transaction_id').val('');
                 $('#itemForm').trigger("reset");
                 $('#modal-title').html("Tambah Transaksi");
                 $('#modal-md').modal('show');
@@ -216,6 +240,7 @@
                     $('#description').val(data.description);
                     $('#transactionType').val(data.debit > 0 ? 'debit' : 'credit');
                     $('#transactionType').hide();
+                    $('#date').val(data.date);
                     $('#labelTransaction').hide();
                 })
             });

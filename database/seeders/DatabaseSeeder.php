@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Database\Factories\ItemFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,9 +17,7 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
-            CategoryTableSeeder::class,
             ProfileSeeder::class,
         ]);
-        \App\Models\Item::factory(100)->create();
     }
 }

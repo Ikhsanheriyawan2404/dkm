@@ -47,7 +47,7 @@ class HomeController extends Controller
     public function dataTableTransactions()
     {
         if (request()->ajax()) {
-            $transactions = Transaction::latest()->get();
+            $transactions = Transaction::orderBy('date', 'desc')->get();
             return DataTables::of($transactions)
                 ->addIndexColumn()
                 ->editColumn('debit', function (Transaction $transaction) {
@@ -55,6 +55,9 @@ class HomeController extends Controller
                 })
                 ->editColumn('credit', function (Transaction $transaction) {
                     return number_format($transaction->credit);
+                })
+                ->editColumn('date', function (Transaction $transaction) {
+                    return date('d-m-Y', strtotime($transaction->date));
                 })
                 ->make(true);
         }

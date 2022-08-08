@@ -18,6 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->string('debit')->nullable();
             $table->string('credit')->nullable();
             $table->text('description');
+            $table->date('date');
             $table->timestamps();
             $table->softDeletes();
         });

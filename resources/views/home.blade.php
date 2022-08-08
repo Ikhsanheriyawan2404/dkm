@@ -130,6 +130,7 @@
                                 <tr>
                                     <th style="width: 1%">No.</th>
                                     <th>Keterangan</th>
+                                    <th>Tanggal</th>
                                     <th>Masuk</th>
                                     <th>Keluar</th>
                                 </tr>
@@ -187,8 +188,9 @@
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'description', name: 'description'},
-                    {data: 'debit', name: 'debit'},
-                    {data: 'credit', name: 'credit'},
+                    {data: 'date', name: 'date'},
+                    {data: 'debit', name: 'debit', className: 'dt-body-right'},
+                    {data: 'credit', name: 'credit',  className: 'dt-body-right'},
                 ],
             })
         });

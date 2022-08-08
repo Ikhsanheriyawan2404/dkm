@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::post('members/delete-selected', [MemberController::class, 'deleteSelected'])->name('members.deleteSelected');
 
     // Transaksi Keuangan
+    Route::get('transactions/print-pdf', [TransactionController::class, 'printPdf'])->name('transactions.printPdf');
     Route::resources(['transactions' => TransactionController::class]);
     Route::post('transactions/delete-selected', [TransactionController::class, 'deleteSelected'])->name('transactions.deleteSelected');
     Route::prefix('trash')->group(function () {

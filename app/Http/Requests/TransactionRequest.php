@@ -29,6 +29,7 @@ class TransactionRequest extends FormRequest
             'credit' => 'numeric',
             'nominal' => 'required',
             'transactionType' => 'required',
+            'date' => 'required|date',
         ];
     }
 }
